@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuService } from '../servicios/menu.service';
+import { debounceTime, fromEvent, map } from 'rxjs';
 
 @Component({
   selector: 'app-buscador-platos',
@@ -14,12 +15,29 @@ export class BuscadorPlatosComponent implements OnInit {
   constructor(private menuService: MenuService) { }
 
   ngOnInit(): void {
+    const cocina =  document.getElementById('cocina')
+    if(cocina != null){
+      const keyup = fromEvent(cocina, 'keyup');
+      keyup.pipe(
+        map((e: any)=> e.currentTarget.value),
+       debounceTime(500)
+      ).subscribe(
+        e => this.onSearch(e));
+    }
+
   }
 
   onSearch(cocina: string){
-    console.log(cocina)
+    if(cocina.length > 2){
     this.menuService.getItemsByType(cocina).subscribe(
       (data => this.platos = data.results)
-    )
+    )}
+  }
+
+  onAddMenu(item: object){
+    let menu = JSON.parse(sessionStorage.getItem('menu')!)
+    menu.push(item)
+    sessionStorage.setItem('menu',JSON.stringify(menu))
+    console.log(menu)
   }
 }

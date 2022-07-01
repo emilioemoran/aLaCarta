@@ -11,21 +11,27 @@ import { MenuService } from '../servicios/menu.service';
 })
 export class PlatosComponent implements OnInit {
 
-  menu: any = {};
+  menu: any = JSON.parse(sessionStorage.getItem('menu')!) || {};
   defoultImage: string = "https://spoonacular.com/menuItemImages/pilaf.png"
   constructor(private menuService:MenuService, private route:Router) { }
 
   ngOnInit(): void {
-
-    this.menuService.getMenu().subscribe(
-      (data: any) => {
-        this.menu = data.results
-        console.log(data);
-      },
-      error => {
-        console.log(error);
-      }
-      )
+    
+    
+    if(JSON.stringify(this.menu)=='{}'){
+      
+      this.menuService.getMenu().subscribe(
+        (data: any) => {
+          sessionStorage.setItem('menu',JSON.stringify(data.results))
+          this.menu = JSON.parse(sessionStorage.getItem('menu')!)
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+        }
+        )
+    }
+    this.menu = JSON.parse(sessionStorage.getItem('menu')!)
   }
 
   onItemDetail(id: number){

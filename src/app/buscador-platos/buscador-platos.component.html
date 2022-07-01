@@ -6,9 +6,9 @@
     </div>
 </header>
 <div class="mb-3">
-     <form (submit)="onSearch(cocina.value)">
-        <input #cocina class="form-control form-control-lg" placeholder="Introduce el tipo de cocina que quieres buscar" aria-label=".form-control-lg example">
-     </form>
+   
+        <input type="text"  id="cocina" class="form-control form-control-lg" placeholder="Introduce el tipo de cocina que quieres buscar" aria-label=".form-control-lg example">
+    
 </div>
     <div class="album py-5 bg-light">
       <div class="container">
@@ -21,8 +21,7 @@
                           <p class="card-text">{{plato.title}}</p>
                           <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                              <button  type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                              <button  type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                              <button (click)="onAddMenu(plato)"  type="button" class="btn btn-sm btn-outline-secondary">Add to Menu</button>
                             </div>
                             <small class="text-muted">9 mins</small>
                           </div>
