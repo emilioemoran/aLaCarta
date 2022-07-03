@@ -1,6 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../servicios/auth.service';
 import { MenuService } from '../servicios/menu.service';
 
 
@@ -13,7 +14,7 @@ export class PlatosComponent implements OnInit {
 
   menu: any = JSON.parse(sessionStorage.getItem('menu')!) || {};
   defoultImage: string = "https://spoonacular.com/menuItemImages/pilaf.png"
-  constructor(private menuService:MenuService, private route:Router) { }
+  constructor(private menuService:MenuService, private route:Router, private auth:AuthService) { }
 
   ngOnInit(): void {
     
@@ -44,9 +45,18 @@ export class PlatosComponent implements OnInit {
   }
 
   onSearch(){
-    
     this.route.navigate(['/buscadorPlatos'])
     console.log("dsaads")
+  }
+
+  onDelete(id :number){
+    const menu = this.menu.filter((plato: { id: number; }) => plato.id != id);
+    sessionStorage.setItem('menu',JSON.stringify(menu))
+  }
+
+  onLogOut(){
+    this.auth.logOut()
+    this.route.navigate(['/'])
   }
 
 

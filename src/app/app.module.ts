@@ -13,6 +13,8 @@ import { MenuService } from './servicios/menu.service';
 import { ApiInterceptorService } from './servicios/api-interceptor.service';
 import { BuscadorPlatosComponent } from './buscador-platos/buscador-platos.component';
 import { DetallePlatoComponent } from './detalle-plato/detalle-plato.component';
+import { AuthService } from './servicios/auth.service';
+import { AuthGuardService } from './servicios/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,10 @@ import { DetallePlatoComponent } from './detalle-plato/detalle-plato.component';
     SweetAlert2Module.forRoot()
   ],
   providers: [ MenuService,
-    { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptorService, multi: true },],
+    { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptorService, multi: true }, 
+    AuthGuardService, 
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

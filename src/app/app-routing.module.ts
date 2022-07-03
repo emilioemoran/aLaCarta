@@ -4,12 +4,13 @@ import { BuscadorPlatosComponent } from './buscador-platos/buscador-platos.compo
 import { DetallePlatoComponent } from './detalle-plato/detalle-plato.component';
 import { LoginComponent } from './login/login.component';
 import { PlatosComponent } from './platos/platos.component';
+import { AuthGuardService } from './servicios/auth-guard.service';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'menu', component: PlatosComponent },
-  { path: 'buscadorPlatos', component: BuscadorPlatosComponent },
-  { path: 'detallePlato', component: DetallePlatoComponent },
+  { path: 'login',  component: LoginComponent },
+  { path: 'menu', canActivate:[AuthGuardService], component: PlatosComponent },
+  { path: 'buscadorPlatos', canActivate:[AuthGuardService], component: BuscadorPlatosComponent },
+  { path: 'detallePlato', canActivate:[AuthGuardService], component: DetallePlatoComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 

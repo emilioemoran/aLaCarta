@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
     this.autentificationService.iniciarSesion(this.form.value).subscribe(
       (data) => {
         console.log(JSON.stringify('data' + data));
+        sessionStorage.setItem('token', data.token)
         this.route.navigate(['/menu', /* { id: data.id } */]);
       },
       (err) => {

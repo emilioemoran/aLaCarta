@@ -3,13 +3,45 @@
       <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
         <h1 class="display-4 fw-bold lh-1">{{plato.title}}</h1>
         <div innerHTML="{{plato.summary}}"></div>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
-          <button type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">ADD</button>
-          <button type="button" class="btn btn-outline-secondary btn-lg px-4">{{plato.pricePerServing}} $</button>
-        </div>
       </div>
       <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
           <img class="rounded-lg-3" src={{plato.image}} >
       </div>
+      <span>
+        <br>
+      </span>
+      <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+        <div class="col">
+          <div class="card mb-4 rounded-3 shadow-sm">
+            <div class="card-header py-3 text-black">
+              <h4 class="my-0 fw-normal">Healt Score</h4>
+            </div>
+            <div class="card-body">
+              <h1 class="card-title pricing-card-title">{{plato.healthScore}}<small class="text-muted fw-light"> puntos</small></h1>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card mb-4 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+              <h4 class="my-0 fw-normal">Tiempo de preparacion</h4>
+            </div>
+            <div class="card-body">
+              <h1 class="card-title pricing-card-title">{{plato.readyInMinutes}}<small class="text-muted fw-light"> minutes</small></h1>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card mb-4 rounded-3 shadow-sm">
+            <div class="card-header py-3 text-black ">
+              <h4 class="my-0 fw-normal">Precio</h4>
+            </div>
+            <div class="card-body">
+              <h1 class="card-title pricing-card-title">${{plato.pricePerServing}}<small class="text-muted fw-light">/Unit</small></h1>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+    
 </div>
